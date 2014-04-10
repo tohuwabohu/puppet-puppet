@@ -19,12 +19,12 @@
 # Copyright 2013 Martin Meinhold, unless otherwise noted.
 #
 class puppet (
-  $ensure = present,
+  $ensure = installed,
   $hiera_backend_package = undef,
   $hiera_backend_version = installed,
   $hiera_backend_provider = gem,
 ) {
-  package { ['puppet', 'hiera']: ensure => latest }
+  package { ['puppet', 'hiera']: ensure => $ensure }
 
   if $hiera_backend_package != undef {
     package { 'rubygems': ensure => latest }
