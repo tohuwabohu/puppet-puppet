@@ -7,7 +7,6 @@ describe 'puppet' do
     let(:params) { {} }
 
     it { should contain_package('puppet').with_ensure('installed') }
-    it { should contain_package('hiera').with_ensure('installed') }
   end
 
   describe 'installs specified hiera backend' do
