@@ -13,7 +13,7 @@
 class puppet::params {
   $puppet_version = installed
   $puppet_package = $::operatingsystem ? {
-    default => 'package',
+    default => 'puppet',
   }
   $puppet_provider = $::operatingsystem ? {
     default => undef,
