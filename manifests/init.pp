@@ -37,12 +37,12 @@
 # Copyright 2013 Martin Meinhold, unless otherwise noted.
 #
 class puppet (
-  $puppet_version = $puppet::params::puppet_version,
-  $puppet_package = $puppet::params::puppet_package,
-  $puppet_provider = $puppet::params::puppet_provider,
-  $hiera_version  = $puppet::params::hiera_version,
-  $hiera_package  = $puppet::params::hiera_package,
-  $hiera_provider = $puppet::params::hiera_provider,
+  $puppet_version         = $puppet::params::puppet_version,
+  $puppet_package         = $puppet::params::puppet_package,
+  $puppet_provider        = $puppet::params::puppet_provider,
+  $hiera_version          = $puppet::params::hiera_version,
+  $hiera_package          = $puppet::params::hiera_package,
+  $hiera_provider         = $puppet::params::hiera_provider,
   $hiera_backend_package  = $puppet::params::hiera_backend_package,
   $hiera_backend_version  = $puppet::params::hiera_backend_version,
   $hiera_backend_provider = $puppet::params::hiera_backend_provider,
