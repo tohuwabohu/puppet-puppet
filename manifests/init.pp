@@ -69,6 +69,4 @@ class puppet (
       require  => Package['rubygems'],
     }
   }
-
-  file { ['/var/cache/puppet', '/var/cache/puppet/archives']: ensure => directory }
 }
