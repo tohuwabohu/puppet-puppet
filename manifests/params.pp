@@ -12,18 +12,10 @@
 #
 class puppet::params {
   $puppet_version = installed
-  $puppet_package = $::operatingsystem ? {
-    default => 'puppet',
-  }
-  $puppet_provider = $::operatingsystem ? {
-    default => undef,
-  }
+  $puppet_package = 'puppet'
+  $puppet_provider = undef
 
   $hiera_version = installed
-  $hiera_package = $::operatingsystem ? {
-    default => 'hiera',
-  }
-  $hiera_provider = $::operatingsystem ? {
-    default => undef,
-  }
+  $hiera_package = 'hiera'
+  $hiera_provider = undef
 }
