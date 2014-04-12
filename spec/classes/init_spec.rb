@@ -12,7 +12,12 @@ describe 'puppet' do
         'provider' => ''
       )
     }
-    it { should contain_package('hiera').with_ensure('installed') }
+    it { should contain_package('hiera').with(
+        'ensure'   => 'installed',
+        'name'     => 'hiera',
+        'provider' => ''
+      )
+    }
   end
 
   describe 'installs specific version of puppet' do

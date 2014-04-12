@@ -20,4 +20,10 @@ class puppet::params {
   }
 
   $hiera_version = installed
+  $hiera_package = $::operatingsystem ? {
+    default => 'hiera',
+  }
+  $hiera_provider = $::operatingsystem ? {
+    default => undef,
+  }
 }

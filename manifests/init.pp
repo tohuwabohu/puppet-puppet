@@ -35,6 +35,8 @@ class puppet (
   $puppet_package = $puppet::params::puppet_package,
   $puppet_provider = $puppet::params::puppet_provider,
   $hiera_version  = $puppet::params::hiera_version,
+  $hiera_package  = $puppet::params::hiera_package,
+  $hiera_provider = $puppet::params::hiera_provider,
   $hiera_backend_package = undef,
   $hiera_backend_version = installed,
   $hiera_backend_provider = gem,
@@ -46,7 +48,11 @@ class puppet (
     provider => $puppet_provider,
   }
 
-  package { 'hiera': ensure => $hiera_version }
+  package { 'hiera':
+    ensure   => $hiera_version,
+    name     => $hiera_package,
+    provider => $hiera_provider,
+  }
 
   if $hiera_backend_package != undef {
     package { 'rubygems': ensure => latest }
