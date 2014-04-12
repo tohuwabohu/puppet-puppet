@@ -1,4 +1,8 @@
 fixtures:
+  repositories:
+    logrotate:
+      repo: "https://github.com/rodjek/puppet-logrotate.git"
+      ref: "1.1.1"
   symlinks:
     puppet: "#{source_dir}"
 

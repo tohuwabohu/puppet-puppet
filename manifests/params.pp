@@ -15,6 +15,12 @@ class puppet::params {
   $puppet_package = 'puppet'
   $puppet_provider = undef
 
+  $puppet_manifest_file = '/etc/puppet/manifests/site.pp'
+  $puppet_log_dir = '/var/log/puppet'
+
+  $puppet_rotate = 7
+  $puppet_rotate_every = 'day'
+
   $hiera_version = installed
   $hiera_package = 'hiera'
   $hiera_provider = undef

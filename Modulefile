@@ -7,3 +7,4 @@ license 'Apache License, Version 2.0'
 summary 'Install and manage Puppet'
 description ''
 
+dependency 'rodjek/logrotate', '1.1.1'

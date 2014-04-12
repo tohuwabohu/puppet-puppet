@@ -1,0 +1,22 @@
+#!/bin/bash
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+PUPPET_OPTS=--detailed-exitcodes --color=false
+PUPPET_MANIFEST=<%= @manifest_file %>
+LOG_FILE="<%= @log_file %>"
+TEMP_FILE=$(mktemp tmp.puppet-XXXXXXXXXX)
+
+chmod 600 $TEMP_FILE
+apt-get -qq update
+puppet apply $PUPPET_OPTS $PUPPET_MANIFEST 2>&1 \
+  | gawk '{ print strftime("%Y-%m-%d %H:%M:%S"), $0; fflush(); }' \
+  | tee -a $LOG_FILE \
+  > $TEMP_FILE
+
+<% if @mail_to -%>
+if [ $? -gt 0 ]; then
+  cat $TEMP_FILE | mail -s "[PUPPET] Changes have been applied on $(hostname)" <%= @mail_to %>
+fi
+<% end -%>
+
+rm $TEMP_FILE
