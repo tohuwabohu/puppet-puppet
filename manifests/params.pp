@@ -18,4 +18,8 @@ class puppet::params {
   $hiera_version = installed
   $hiera_package = 'hiera'
   $hiera_provider = undef
+
+  $hiera_backend_version = installed
+  $hiera_backend_package = undef
+  $hiera_backend_provider = gem
 }

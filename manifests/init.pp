@@ -37,9 +37,9 @@ class puppet (
   $hiera_version  = $puppet::params::hiera_version,
   $hiera_package  = $puppet::params::hiera_package,
   $hiera_provider = $puppet::params::hiera_provider,
-  $hiera_backend_package = undef,
-  $hiera_backend_version = installed,
-  $hiera_backend_provider = gem,
+  $hiera_backend_package  = $puppet::params::hiera_backend_package,
+  $hiera_backend_version  = $puppet::params::hiera_backend_version,
+  $hiera_backend_provider = $puppet::params::hiera_backend_provider,
 ) inherits puppet::params {
 
   package { 'puppet':
