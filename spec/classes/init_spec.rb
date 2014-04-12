@@ -35,7 +35,6 @@ describe 'puppet' do
     let(:params) { {:hiera_backend_package => 'hiera-eyaml'} }
 
     it { should contain_package('hiera-eyaml').with_ensure('installed') }
-    it { should contain_package('rubygems').with_ensure('latest') }
   end
 
   describe 'installs specified hiera backend with a certain version' do

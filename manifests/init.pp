@@ -61,12 +61,9 @@ class puppet (
   }
 
   if $hiera_backend_package != undef {
-    package { 'rubygems': ensure => latest }
-
     package { $hiera_backend_package:
       ensure   => $hiera_backend_version,
       provider => $hiera_backend_provider,
-      require  => Package['rubygems'],
     }
   }
 }
