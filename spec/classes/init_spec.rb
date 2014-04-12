@@ -43,10 +43,4 @@ describe 'puppet' do
 
     it { should contain_package('hiera-eyaml').with_ensure('1.0.0') }
   end
-
-  describe 'creates directory for archives cache' do
-    let(:params) { {} }
-
-    it { should contain_file('/var/cache/puppet/archives').with_ensure('directory') }
-  end
 end
