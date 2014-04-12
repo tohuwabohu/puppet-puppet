@@ -25,12 +25,12 @@
 # Copyright 2013 Martin Meinhold, unless otherwise noted.
 #
 class puppet (
-  $puppet_version = installed,
-  $hiera_version  = installed,
+  $puppet_version = $puppet::params::puppet_version,
+  $hiera_version  = $puppet::params::hiera_version,
   $hiera_backend_package = undef,
   $hiera_backend_version = installed,
   $hiera_backend_provider = gem,
-) {
+) inherits puppet::params {
   package { 'puppet': ensure => $puppet_version }
   package { 'hiera': ensure => $hiera_version }
 
