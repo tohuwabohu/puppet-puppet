@@ -4,8 +4,11 @@
 #
 # === Parameters
 #
-# [*ensure*]
+# [*puppet_version*]
 #   Set the version of Puppet to be installed.
+#
+# [*hiera_version*]
+#   Set the version of hiera to be installed.
 #
 # [*hiera_backend_package*]
 #   Set the name of the hiera backend to be installed
@@ -22,12 +25,14 @@
 # Copyright 2013 Martin Meinhold, unless otherwise noted.
 #
 class puppet (
-  $ensure = installed,
+  $puppet_version = installed,
+  $hiera_version  = installed,
   $hiera_backend_package = undef,
   $hiera_backend_version = installed,
   $hiera_backend_provider = gem,
 ) {
-  package { 'puppet': ensure => $ensure }
+  package { 'puppet': ensure => $puppet_version }
+  package { 'hiera': ensure => $hiera_version }
 
   if $hiera_backend_package != undef {
     package { 'rubygems': ensure => latest }
