@@ -7,6 +7,12 @@
 # [*puppet_version*]
 #   Set the version of Puppet to be installed.
 #
+# [*puppet_package*]
+#   Set the name of the package to be installed.
+#
+# [*puppet_provider*]
+#   Set the provider used to install the package.
+#
 # [*hiera_version*]
 #   Set the version of hiera to be installed.
 #
@@ -26,12 +32,20 @@
 #
 class puppet (
   $puppet_version = $puppet::params::puppet_version,
+  $puppet_package = $puppet::params::puppet_package,
+  $puppet_provider = $puppet::params::puppet_provider,
   $hiera_version  = $puppet::params::hiera_version,
   $hiera_backend_package = undef,
   $hiera_backend_version = installed,
   $hiera_backend_provider = gem,
 ) inherits puppet::params {
-  package { 'puppet': ensure => $puppet_version }
+
+  package { 'puppet':
+    ensure   => $puppet_version,
+    name     => $puppet_package,
+    provider => $puppet_provider,
+  }
+
   package { 'hiera': ensure => $hiera_version }
 
   if $hiera_backend_package != undef {

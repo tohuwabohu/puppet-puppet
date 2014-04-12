@@ -12,5 +12,12 @@
 #
 class puppet::params {
   $puppet_version = installed
+  $puppet_package = $::operatingsystem ? {
+    default => 'package',
+  }
+  $puppet_provider = $::operatingsystem ? {
+    default => undef,
+  }
+
   $hiera_version = installed
 }
