@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-PUPPET_OPTS=--detailed-exitcodes --color=false
+PUPPET_OPTS="--detailed-exitcodes --color=false"
 PUPPET_MANIFEST="<%= @manifest_file %>"
 LOG_FILE="<%= @log_file %>"
 TEMP_FILE=$(mktemp tmp.puppet-XXXXXXXXXX)
