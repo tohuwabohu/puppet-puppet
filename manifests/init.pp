@@ -16,11 +16,17 @@
 # [*hiera_version*]
 #   Set the version of hiera to be installed.
 #
-# [*hiera_backend_package*]
-#   Set the name of the hiera backend to be installed
+# [*hiera_provider*]
+#   Set the provider used to install hiera.
 #
 # [*hiera_backend_version*]
-#   Set the version of the hiera backend
+#   Set the version of the hiera backend.
+#
+# [*hiera_backend_package*]
+#   Set the name of the hiera backend to be installed.
+#
+# [*hiera_backend_provider*]
+#   Set the provider used to install the hiera backend package.
 #
 # === Authors
 #
