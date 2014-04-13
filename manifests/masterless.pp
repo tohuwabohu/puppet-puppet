@@ -8,7 +8,7 @@
 #   Set the manifest file to be executed.
 #
 # [*log_dir*]
-#   Set the directory where to write the logs to.
+#   Set the directory where to write the log file.
 #
 # [*rotate*]
 #   Set the number of rotated log files to keep on disk.
@@ -18,7 +18,7 @@
 #   Valid values are 'hour', 'day', 'week', 'month' and 'year'.
 #
 # [*mail_to*]
-#   Set the email address where to send the puppet log in case the run changed something (or failed).
+#   Set the email address where to send the puppet log in case the run changed something (or failed). (Optional)
 #
 # === Authors
 #
