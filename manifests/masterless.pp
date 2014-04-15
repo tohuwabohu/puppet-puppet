@@ -36,6 +36,13 @@ class puppet::masterless (
   $mail_to       = undef,
 ) inherits puppet::params {
 
+  validate_absolute_path($manifest_file)
+  validate_absolute_path($log_dir)
+
+  if !is_integer($rotate) {
+    fail("Class[Puppet::Masterless]: rotate must be an integer, got '${rotate}'")
+  }
+
   require puppet
 
   $log_file = "${log_dir}/puppet.log"

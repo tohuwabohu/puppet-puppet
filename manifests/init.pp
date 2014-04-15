@@ -37,16 +37,32 @@
 # Copyright 2013 Martin Meinhold, unless otherwise noted.
 #
 class puppet (
-  $puppet_version         = $puppet::params::puppet_version,
-  $puppet_package         = $puppet::params::puppet_package,
-  $puppet_provider        = $puppet::params::puppet_provider,
-  $hiera_version          = $puppet::params::hiera_version,
-  $hiera_package          = $puppet::params::hiera_package,
-  $hiera_provider         = $puppet::params::hiera_provider,
-  $hiera_backend_package  = $puppet::params::hiera_backend_package,
-  $hiera_backend_version  = $puppet::params::hiera_backend_version,
-  $hiera_backend_provider = $puppet::params::hiera_backend_provider,
+  $puppet_version         = params_lookup('puppet_version'),
+  $puppet_package         = params_lookup('puppet_package'),
+  $puppet_provider        = params_lookup('puppet_provider'),
+  $hiera_version          = params_lookup('hiera_version'),
+  $hiera_package          = params_lookup('hiera_package'),
+  $hiera_provider         = params_lookup('hiera_provider'),
+  $hiera_backend_package  = params_lookup('hiera_backend_package'),
+  $hiera_backend_version  = params_lookup('hiera_backend_version'),
+  $hiera_backend_provider = params_lookup('hiera_backend_provider'),
 ) inherits puppet::params {
+
+  if $puppet_version !~ /^[a-zA-Z0-9\._-]+$/ {
+    fail("Class[Puppet]: puppet_version must be alphanumeric, got '${puppet_version}'")
+  }
+
+  if $puppet_package !~ /^[a-zA-Z0-9\._-]+$/ {
+    fail("Class[Puppet]: puppet_package must be alphanumeric, got '${puppet_package}'")
+  }
+
+  if $hiera_version !~ /^[a-zA-Z0-9\._-]+$/ {
+    fail("Class[Puppet]: hiera_version must be alphanumeric, got '${hiera_version}'")
+  }
+
+  if $hiera_package !~ /^[a-zA-Z0-9\._-]+$/ {
+    fail("Class[Puppet]: hiera_package must be alphanumeric, got '${hiera_package}'")
+  }
 
   package { 'puppet':
     ensure   => $puppet_version,
