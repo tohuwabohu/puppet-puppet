@@ -16,7 +16,7 @@ Install a specific version of puppet and hiera:
 
 ```
 class { 'puppet':
-  puppet_versoin => '3.4.0',
+  puppet_version => '3.4.0',
   hiera_version  => '1.3.2',
 }
 ```
