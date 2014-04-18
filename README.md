@@ -6,12 +6,35 @@ Manage the Puppet installation.
 
 ##Usage
 
-Install puppet and the hiera backend `hiera-eyaml`.
+Install puppet and hiera:
+
+```
+class { 'puppet': }
+```
+
+Install a specific version of puppet and hiera:
+
+```
+class { 'puppet':
+  puppet_versoin => '3.4.0',
+  hiera_version  => '1.3.2',
+}
+```
+
+Install puppet, hiera and the hiera backend `hiera-eyaml`:
 
 ```
 class { 'puppet':
   hiera_backend_package => 'hiera-eyaml',
   hiera_backend_version => '2.0.0',
+}
+```
+
+Run puppet once a day and notify `root@example.com` in case changes have been made:
+
+```
+class { 'puppet::masterless':
+  mail_to => 'root@example.com',
 }
 ```
 
