@@ -23,6 +23,9 @@
 # [*mail_to*]
 #   Set the email address where to send the puppet log in case the run changed something (or failed). (Optional)
 #
+# [*mail_subject*]
+#   Set the subject of the email.
+#
 # === Authors
 #
 # Martin Meinhold <Martin.Meinhold@gmx.de>
@@ -38,6 +41,7 @@ class puppet::masterless (
   $rotate        = $puppet::params::puppet_rotate,
   $rotate_every  = $puppet::params::puppet_rotate_every,
   $mail_to       = undef,
+  $mail_subject  = $puppet::params::puppet_mail_subject,
 ) inherits puppet::params {
 
   validate_absolute_path($manifest_file)
@@ -48,6 +52,9 @@ class puppet::masterless (
   }
   if !is_integer($rotate) {
     fail("Class[Puppet::Masterless]: rotate must be an integer, got '${rotate}'")
+  }
+  if !empty($mail_to) and empty($mail_subject) {
+    fail("Class[Puppet::Masterless]: mail_subject cannot be empty")
   }
 
   require puppet

@@ -15,7 +15,7 @@ puppet apply $PUPPET_OPTS $PUPPET_MANIFEST 2>&1 \
 
 <% if !@mail_to.nil? && !@mail_to.empty? -%>
 if [ $? -gt 0 ]; then
-  cat $TEMP_FILE | mail -s "[PUPPET] Changes have been applied on $(hostname)" <%= @mail_to %>
+  cat $TEMP_FILE | mail -s "<%= @mail_subject %>" <%= @mail_to %>
 fi
 <% end -%>
 

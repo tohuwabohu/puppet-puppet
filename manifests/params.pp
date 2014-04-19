@@ -22,6 +22,8 @@ class puppet::params {
   $puppet_rotate = 7
   $puppet_rotate_every = 'day'
 
+  $puppet_mail_subject = '[Puppet] Changes have been applied on $(hostname)'
+
   $hiera_ensure = installed
   $hiera_package = 'hiera'
   $hiera_provider = undef

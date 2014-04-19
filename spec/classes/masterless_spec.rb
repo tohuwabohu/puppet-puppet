@@ -92,4 +92,18 @@ describe 'puppet::masterless' do
 
     it { should contain_file('/etc/cron.daily/puppet-apply').without_content(/mail/) }
   end
+
+  describe 'with subject => puppet changed something' do
+    let(:params) { {:mail_to => 'root@example.com', :mail_subject => 'puppet changed something'} }
+
+    it { should contain_file('/etc/cron.daily/puppet-apply').with_content(/mail -s "puppet changed something"/) }
+  end
+
+  describe 'with empty mail_subject' do
+    let(:params) { {:mail_to => 'root@example.com', :mail_subject => ''} }
+
+    it do
+      expect { should contain_file('/etc/cron.daily/puppet-apply') }.to raise_error(Puppet::Error, /mail_subject/)
+    end
+  end
 end
