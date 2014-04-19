@@ -15,10 +15,25 @@ describe 'puppet::masterless' do
     }
     it { should contain_file('/etc/cron.daily/puppet-apply').without_content(/mail/) }
     it { should contain_logrotate__rule('puppet').with(
+        'ensure'       => 'present',
         'rotate'       => '7',
         'rotate_every' => 'day'
       )
     }
+  end
+
+  describe 'with ensure => absent' do
+    let(:params) { {:ensure => 'absent'} }
+
+    it { should contain_file('/etc/cron.daily/puppet-apply').with_ensure('absent') }
+    it { should contain_logrotate__rule('puppet').with_ensure('absent') }
+  end
+  describe 'with invalid ensure' do
+    let(:params) { {:ensure => 'invalid'} }
+
+    it do
+      expect { should contain_file('/etc/cron.daily/puppet-apply') }.to raise_error(Puppet::Error, /invalid/)
+    end
   end
 
   describe 'with invalid manifest_file' do

@@ -15,6 +15,7 @@ class puppet::params {
   $puppet_package = 'puppet'
   $puppet_provider = undef
 
+  $puppet_masterless_ensure = present
   $puppet_manifest_file = '/etc/puppet/manifests/site.pp'
   $puppet_log_dir = '/var/log/puppet'
 

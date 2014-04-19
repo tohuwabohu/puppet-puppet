@@ -4,6 +4,9 @@
 #
 # === Parameters
 #
+# [*ensure*]
+#   Set the state the masterless mode should be in: either present or absent.
+#
 # [*manifest_file*]
 #   Set the manifest file to be executed.
 #
@@ -29,6 +32,7 @@
 # Copyright 2014 Martin Meinhold, unless otherwise noted.
 #
 class puppet::masterless (
+  $ensure        = $puppet::params::puppet_masterless_ensure,
   $manifest_file = $puppet::params::puppet_manifest_file,
   $log_dir       = $puppet::params::puppet_log_dir,
   $rotate        = $puppet::params::puppet_rotate,
@@ -39,15 +43,22 @@ class puppet::masterless (
   validate_absolute_path($manifest_file)
   validate_absolute_path($log_dir)
 
+  if $ensure !~ /^present$|^absent$/ {
+    fail("Class[Puppet::Masterless]: ensure must be either 'present' or 'absent', got '${ensure}'")
+  }
   if !is_integer($rotate) {
     fail("Class[Puppet::Masterless]: rotate must be an integer, got '${rotate}'")
   }
 
   require puppet
 
+  $log_file_ensure = $ensure ? {
+    absent  => absent,
+    default => file,
+  }
   $log_file = "${log_dir}/puppet.log"
   file { '/etc/cron.daily/puppet-apply':
-    ensure  => file,
+    ensure  => $log_file_ensure,
     content => template('puppet/etc/cron.daily/puppet-apply.erb'),
     owner   => 'root',
     group   => 'root',
@@ -56,6 +67,7 @@ class puppet::masterless (
   }
 
   logrotate::rule { 'puppet':
+    ensure        => $ensure,
     path          => $log_dir,
     rotate        => $rotate,
     rotate_every  => $rotate_every,
