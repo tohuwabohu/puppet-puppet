@@ -54,7 +54,7 @@ class puppet::masterless (
     fail("Class[Puppet::Masterless]: rotate must be an integer, got '${rotate}'")
   }
   if !empty($mail_to) and empty($mail_subject) {
-    fail("Class[Puppet::Masterless]: mail_subject cannot be empty")
+    fail('Class[Puppet::Masterless]: mail_subject cannot be empty')
   }
 
   require puppet
