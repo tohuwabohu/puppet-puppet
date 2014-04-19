@@ -20,17 +20,17 @@ describe 'puppet' do
     }
   end
 
-  describe 'with puppet_version => 1.2.3' do
-    let(:params) { {:puppet_version => '1.2.3'} }
+  describe 'with puppet_ensure => 1.2.3' do
+    let(:params) { {:puppet_ensure => '1.2.3'} }
 
     it { should contain_package('puppet').with_ensure('1.2.3') }
   end
 
-  describe 'with empty puppet_version' do
-    let(:params) { {:puppet_version => ''} }
+  describe 'with empty puppet_ensure' do
+    let(:params) { {:puppet_ensure => ''} }
 
     it do
-      expect { should contain_package('puppet') }.to raise_error(Puppet::Error, /puppet_version/)
+      expect { should contain_package('puppet') }.to raise_error(Puppet::Error, /puppet_ensure/)
     end
   end
 

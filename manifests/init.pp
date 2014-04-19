@@ -4,8 +4,8 @@
 #
 # === Parameters
 #
-# [*puppet_version*]
-#   Set the version of Puppet to be installed.
+# [*puppet_ensure*]
+#   Set state the package should be in.
 #
 # [*puppet_package*]
 #   Set the name of the package to be installed.
@@ -37,7 +37,7 @@
 # Copyright 2013 Martin Meinhold, unless otherwise noted.
 #
 class puppet (
-  $puppet_version         = params_lookup('puppet_version'),
+  $puppet_ensure          = params_lookup('puppet_ensure'),
   $puppet_package         = params_lookup('puppet_package'),
   $puppet_provider        = params_lookup('puppet_provider'),
   $hiera_version          = params_lookup('hiera_version'),
@@ -48,8 +48,8 @@ class puppet (
   $hiera_backend_provider = params_lookup('hiera_backend_provider'),
 ) inherits puppet::params {
 
-  if $puppet_version !~ /^[a-zA-Z0-9\._-]+$/ {
-    fail("Class[Puppet]: puppet_version must be alphanumeric, got '${puppet_version}'")
+  if $puppet_ensure !~ /^[a-zA-Z0-9\._-]+$/ {
+    fail("Class[Puppet]: puppet_ensure must be alphanumeric, got '${puppet_ensure}'")
   }
 
   if $puppet_package !~ /^[a-zA-Z0-9\._-]+$/ {
@@ -65,7 +65,7 @@ class puppet (
   }
 
   package { 'puppet':
-    ensure   => $puppet_version,
+    ensure   => $puppet_ensure,
     name     => $puppet_package,
     provider => $puppet_provider,
   }

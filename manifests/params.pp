@@ -11,7 +11,7 @@
 # Copyright 2014 Martin Meinhold, unless otherwise noted.
 #
 class puppet::params {
-  $puppet_version = installed
+  $puppet_ensure = installed
   $puppet_package = 'puppet'
   $puppet_provider = undef
 
