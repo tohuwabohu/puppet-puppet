@@ -48,17 +48,17 @@ describe 'puppet' do
     end
   end
 
-  describe 'with hiera_version => 1.2.3' do
-    let(:params) { {:hiera_version => '1.2.3'} }
+  describe 'with hiera_ensure => 1.2.3' do
+    let(:params) { {:hiera_ensure => '1.2.3'} }
 
     it { should contain_package('hiera').with_ensure('1.2.3') }
   end
 
-  describe 'with empty hiera_version' do
-    let(:params) { {:hiera_version => ''} }
+  describe 'with empty hiera_ensure' do
+    let(:params) { {:hiera_ensure => ''} }
 
     it do
-      expect { should contain_package('hiera') }.to raise_error(Puppet::Error, /hiera_version/)
+      expect { should contain_package('hiera') }.to raise_error(Puppet::Error, /hiera_ensure/)
     end
   end
 

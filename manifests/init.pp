@@ -13,8 +13,8 @@
 # [*puppet_provider*]
 #   Set the provider used to install the package.
 #
-# [*hiera_version*]
-#   Set the version of hiera to be installed.
+# [*hiera_ensure*]
+#   Set state the package should be in.
 #
 # [*hiera_provider*]
 #   Set the provider used to install hiera.
@@ -40,7 +40,7 @@ class puppet (
   $puppet_ensure          = params_lookup('puppet_ensure'),
   $puppet_package         = params_lookup('puppet_package'),
   $puppet_provider        = params_lookup('puppet_provider'),
-  $hiera_version          = params_lookup('hiera_version'),
+  $hiera_ensure           = params_lookup('hiera_ensure'),
   $hiera_package          = params_lookup('hiera_package'),
   $hiera_provider         = params_lookup('hiera_provider'),
   $hiera_backend_package  = params_lookup('hiera_backend_package'),
@@ -56,8 +56,8 @@ class puppet (
     fail("Class[Puppet]: puppet_package must be alphanumeric, got '${puppet_package}'")
   }
 
-  if $hiera_version !~ /^[a-zA-Z0-9\._-]+$/ {
-    fail("Class[Puppet]: hiera_version must be alphanumeric, got '${hiera_version}'")
+  if $hiera_ensure !~ /^[a-zA-Z0-9\._-]+$/ {
+    fail("Class[Puppet]: hiera_ensure must be alphanumeric, got '${hiera_ensure}'")
   }
 
   if $hiera_package !~ /^[a-zA-Z0-9\._-]+$/ {
@@ -71,7 +71,7 @@ class puppet (
   }
 
   package { 'hiera':
-    ensure   => $hiera_version,
+    ensure   => $hiera_ensure,
     name     => $hiera_package,
     provider => $hiera_provider,
   }

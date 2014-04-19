@@ -21,7 +21,7 @@ class puppet::params {
   $puppet_rotate = 7
   $puppet_rotate_every = 'day'
 
-  $hiera_version = installed
+  $hiera_ensure = installed
   $hiera_package = 'hiera'
   $hiera_provider = undef
 
