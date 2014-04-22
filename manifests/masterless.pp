@@ -75,7 +75,7 @@ class puppet::masterless (
 
   logrotate::rule { 'puppet':
     ensure        => $ensure,
-    path          => $log_dir,
+    path          => "${log_dir}/*.log",
     rotate        => $rotate,
     rotate_every  => $rotate_every,
     compress      => true,
