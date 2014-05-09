@@ -64,15 +64,13 @@ class puppet (
     fail("Class[Puppet]: hiera_package must be alphanumeric, got '${hiera_package}'")
   }
 
-  package { 'puppet':
+  package { $puppet_package:
     ensure   => $puppet_ensure,
-    name     => $puppet_package,
     provider => $puppet_provider,
   }
 
-  package { 'hiera':
+  package { $hiera_package:
     ensure   => $hiera_ensure,
-    name     => $hiera_package,
     provider => $hiera_provider,
   }
 

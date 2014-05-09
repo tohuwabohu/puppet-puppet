@@ -37,7 +37,7 @@ describe 'puppet' do
   describe 'with puppet_package => chef' do
     let(:params) { {:puppet_package => 'chef'} }
 
-    it { should contain_package('puppet').with_name('chef') }
+    it { should contain_package('chef') }
   end
 
   describe 'with empty puppet_package' do
@@ -65,7 +65,7 @@ describe 'puppet' do
   describe 'with hiera_package => line' do
     let(:params) { {:hiera_package => 'line'} }
 
-    it { should contain_package('hiera').with_name('line') }
+    it { should contain_package('line') }
   end
 
   describe 'with empty hiera_package' do
