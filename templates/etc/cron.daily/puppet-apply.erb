@@ -19,7 +19,7 @@ puppet apply $PUPPET_OPTS $PUPPET_MANIFEST 2>&1 \
   > $TEMP_FILE
 
 <% if !@mail_to.nil? && !@mail_to.empty? -%>
-if [ $? -gt 0 ]; then
+if [ $PIPESTATUS[0] -gt 0 ]; then
   cat $TEMP_FILE | mail -s "<%= @mail_subject %>" <%= @mail_to %>
 fi
 <% end -%>
