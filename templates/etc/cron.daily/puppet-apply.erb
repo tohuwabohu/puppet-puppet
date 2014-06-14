@@ -6,6 +6,11 @@ PUPPET_MANIFEST="<%= @manifest_file %>"
 LOG_FILE="<%= @log_file %>"
 TEMP_FILE=$(mktemp tmp.puppet-XXXXXXXXXX)
 
+if [ "$EUID" -ne "0" ]; then
+  echo "This script must be run as root." 1>&2
+  exit 1
+fi
+
 chmod 600 $TEMP_FILE
 apt-get -qq update
 puppet apply $PUPPET_OPTS $PUPPET_MANIFEST 2>&1 \
