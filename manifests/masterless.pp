@@ -7,6 +7,9 @@
 # [*ensure*]
 #   Set the state the masterless mode should be in: either present or absent.
 #
+# [*conf_dir*]
+#   Set the main configuration directory (e.g. /etc/puppet).
+#
 # [*manifest_file*]
 #   Set the manifest file to be executed.
 #
@@ -36,6 +39,7 @@
 #
 class puppet::masterless (
   $ensure        = $puppet::params::puppet_masterless_ensure,
+  $conf_dir      = $puppet::params::puppet_conf_dir,
   $manifest_file = $puppet::params::puppet_manifest_file,
   $log_dir       = $puppet::params::puppet_log_dir,
   $rotate        = $puppet::params::puppet_rotate,
@@ -44,6 +48,7 @@ class puppet::masterless (
   $mail_subject  = $puppet::params::puppet_mail_subject,
 ) inherits puppet::params {
 
+  validate_absolute_path($conf_dir)
   validate_absolute_path($manifest_file)
   validate_absolute_path($log_dir)
 

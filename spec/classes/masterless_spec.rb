@@ -36,6 +36,14 @@ describe 'puppet::masterless' do
     end
   end
 
+  describe 'should not accept invalid conf_dir' do
+    let(:params) { {:conf_dir => 'invalid conf_dir'} }
+
+    it do
+      expect { should contain_file('/etc/cron.daily/puppet-apply') }.to raise_error(Puppet::Error, /invalid conf_dir/)
+    end
+  end
+
   describe 'with invalid manifest_file' do
     let(:params) { {:manifest_file => 'foo bar'} }
 
