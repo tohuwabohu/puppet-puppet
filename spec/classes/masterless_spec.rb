@@ -15,9 +15,9 @@ describe 'puppet::masterless' do
     }
     it { should contain_file('/etc/cron.daily/puppet-apply').without_content(/mail/) }
     it { should contain_logrotate__rule('puppet').with(
-        'ensure'       => 'present',
-        'rotate'       => '7',
-        'rotate_every' => 'day'
+        'ensure' => 'present',
+        'rotate' => '5',
+        'size'   => '100k'
       )
     }
   end
@@ -86,6 +86,12 @@ describe 'puppet::masterless' do
     it do
       expect { should contain_logrotate__rule('puppet') }.to raise_error(Puppet::Error, /rotate_every/)
     end
+  end
+
+  describe 'with rotate_size => 100k' do
+    let(:params) { {:rotate_size => '100k'} }
+
+    it { should contain_logrotate__rule('puppet').with_size('100k') }
   end
 
   describe 'with mail_to => foobar@example.com' do

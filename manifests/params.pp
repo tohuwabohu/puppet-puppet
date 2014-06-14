@@ -20,8 +20,9 @@ class puppet::params {
   $puppet_manifest_file = '/etc/puppet/manifests/site.pp'
   $puppet_log_dir = '/var/log/puppet'
 
-  $puppet_rotate = 7
-  $puppet_rotate_every = 'day'
+  $puppet_rotate = 5
+  $puppet_rotate_every = undef
+  $puppet_rotate_size = '100k'
 
   $puppet_mail_subject = '[Puppet] Changes have been applied on $(hostname)'
 

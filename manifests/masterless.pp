@@ -23,6 +23,10 @@
 #   How often the log files should be rotated.
 #   Valid values are 'hour', 'day', 'week', 'month' and 'year'.
 #
+# [*rotate_size*]
+#   Set the size a log file has to reach before it will be rotated (optional).  The default units are bytes, append k,
+#   M or G for kilobytes, megabytes or gigabytes respectively.
+#
 # [*mail_to*]
 #   Set the email address where to send the puppet log in case the run changed something (or failed). (Optional)
 #
@@ -44,6 +48,7 @@ class puppet::masterless (
   $log_dir       = $puppet::params::puppet_log_dir,
   $rotate        = $puppet::params::puppet_rotate,
   $rotate_every  = $puppet::params::puppet_rotate_every,
+  $rotate_size   = $puppet::params::puppet_rotate_size,
   $mail_to       = undef,
   $mail_subject  = $puppet::params::puppet_mail_subject,
 ) inherits puppet::params {
@@ -83,6 +88,7 @@ class puppet::masterless (
     path          => "${log_dir}/*.log",
     rotate        => $rotate,
     rotate_every  => $rotate_every,
+    size          => $rotate_size,
     compress      => true,
     delaycompress => true,
     missingok     => true,
