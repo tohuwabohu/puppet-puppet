@@ -1,4 +1,4 @@
-name 'tohuwabohu-puppet'
+name 'tohuwabohu-masterless'
 version '1.0.0'
 source 'https://github.com/tohuwabohu/puppet-masterless.git'
 project_page 'https://github.com/tohuwabohu/puppet-masterless'

@@ -1,4 +1,4 @@
-# == Class: puppet::masterless
+# == Class: masterless::masterless
 #
 # Run Puppet once a day in masterless mode.
 #
@@ -41,33 +41,33 @@
 #
 # Copyright 2014 Martin Meinhold, unless otherwise noted.
 #
-class puppet::masterless (
-  $ensure        = $puppet::params::puppet_masterless_ensure,
-  $conf_dir      = $puppet::params::puppet_conf_dir,
-  $manifest_file = $puppet::params::puppet_manifest_file,
-  $log_dir       = $puppet::params::puppet_log_dir,
-  $rotate        = $puppet::params::puppet_rotate,
-  $rotate_every  = $puppet::params::puppet_rotate_every,
-  $rotate_size   = $puppet::params::puppet_rotate_size,
+class masterless::masterless (
+  $ensure        = $masterless::params::puppet_masterless_ensure,
+  $conf_dir      = $masterless::params::puppet_conf_dir,
+  $manifest_file = $masterless::params::puppet_manifest_file,
+  $log_dir       = $masterless::params::puppet_log_dir,
+  $rotate        = $masterless::params::puppet_rotate,
+  $rotate_every  = $masterless::params::puppet_rotate_every,
+  $rotate_size   = $masterless::params::puppet_rotate_size,
   $mail_to       = undef,
-  $mail_subject  = $puppet::params::puppet_mail_subject,
-) inherits puppet::params {
+  $mail_subject  = $masterless::params::puppet_mail_subject,
+) inherits masterless::params {
 
   validate_absolute_path($conf_dir)
   validate_absolute_path($manifest_file)
   validate_absolute_path($log_dir)
 
   if $ensure !~ /^present$|^absent$/ {
-    fail("Class[Puppet::Masterless]: ensure must be either 'present' or 'absent', got '${ensure}'")
+    fail("Class[Masterless::Masterless]: ensure must be either 'present' or 'absent', got '${ensure}'")
   }
   if !is_integer($rotate) {
-    fail("Class[Puppet::Masterless]: rotate must be an integer, got '${rotate}'")
+    fail("Class[Masterless::Masterless]: rotate must be an integer, got '${rotate}'")
   }
   if !empty($mail_to) and empty($mail_subject) {
-    fail('Class[Puppet::Masterless]: mail_subject cannot be empty')
+    fail('Class[Masterless::Masterless]: mail_subject cannot be empty')
   }
 
-  require puppet
+  require masterless
 
   $log_file_ensure = $ensure ? {
     absent  => absent,
@@ -76,7 +76,7 @@ class puppet::masterless (
   $log_file = "${log_dir}/puppet.log"
   file { '/etc/cron.daily/puppet-apply':
     ensure  => $log_file_ensure,
-    content => template('puppet/etc/cron.daily/puppet-apply.erb'),
+    content => template('masterless/etc/cron.daily/puppet-apply.erb'),
     owner   => 'root',
     group   => 'root',
     mode    => '0755',

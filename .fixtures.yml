@@ -10,5 +10,5 @@ fixtures:
       repo: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
       ref: "4.1.0"
   symlinks:
-    puppet: "#{source_dir}"
+    masterless: "#{source_dir}"
 

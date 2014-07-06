@@ -1,4 +1,4 @@
-# == Class: puppet
+# == Class: masterless
 #
 # Install and manage Puppet.
 #
@@ -36,7 +36,7 @@
 #
 # Copyright 2013 Martin Meinhold, unless otherwise noted.
 #
-class puppet (
+class masterless (
   $puppet_ensure          = params_lookup('puppet_ensure'),
   $puppet_package         = params_lookup('puppet_package'),
   $puppet_provider        = params_lookup('puppet_provider'),
@@ -46,22 +46,22 @@ class puppet (
   $hiera_backend_package  = params_lookup('hiera_backend_package'),
   $hiera_backend_version  = params_lookup('hiera_backend_version'),
   $hiera_backend_provider = params_lookup('hiera_backend_provider'),
-) inherits puppet::params {
+) inherits masterless::params {
 
   if $puppet_ensure !~ /^[a-zA-Z0-9\._-]+$/ {
-    fail("Class[Puppet]: puppet_ensure must be alphanumeric, got '${puppet_ensure}'")
+    fail("Class[Masterless]: puppet_ensure must be alphanumeric, got '${puppet_ensure}'")
   }
 
   if $puppet_package !~ /^[a-zA-Z0-9\._-]+$/ {
-    fail("Class[Puppet]: puppet_package must be alphanumeric, got '${puppet_package}'")
+    fail("Class[Masterless]: puppet_package must be alphanumeric, got '${puppet_package}'")
   }
 
   if $hiera_ensure !~ /^[a-zA-Z0-9\._-]+$/ {
-    fail("Class[Puppet]: hiera_ensure must be alphanumeric, got '${hiera_ensure}'")
+    fail("Class[Masterless]: hiera_ensure must be alphanumeric, got '${hiera_ensure}'")
   }
 
   if $hiera_package !~ /^[a-zA-Z0-9\._-]+$/ {
-    fail("Class[Puppet]: hiera_package must be alphanumeric, got '${hiera_package}'")
+    fail("Class[Masterless]: hiera_package must be alphanumeric, got '${hiera_package}'")
   }
 
   package { $puppet_package:
