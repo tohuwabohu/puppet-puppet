@@ -8,5 +8,4 @@ summary 'Install and manage Puppet in masterless mode.'
 description ''
 
 dependency 'rodjek/logrotate', '1.x'
-dependency 'example42/puppi', '2.x'
 dependency 'puppetlabs/stdlib', '4.x'

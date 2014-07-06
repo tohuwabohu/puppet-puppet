@@ -37,15 +37,15 @@
 # Copyright 2013 Martin Meinhold, unless otherwise noted.
 #
 class masterless (
-  $puppet_ensure          = params_lookup('puppet_ensure'),
-  $puppet_package         = params_lookup('puppet_package'),
-  $puppet_provider        = params_lookup('puppet_provider'),
-  $hiera_ensure           = params_lookup('hiera_ensure'),
-  $hiera_package          = params_lookup('hiera_package'),
-  $hiera_provider         = params_lookup('hiera_provider'),
-  $hiera_backend_package  = params_lookup('hiera_backend_package'),
-  $hiera_backend_version  = params_lookup('hiera_backend_version'),
-  $hiera_backend_provider = params_lookup('hiera_backend_provider'),
+  $puppet_ensure          = $masterless::params::puppet_ensure,
+  $puppet_package         = $masterless::params::puppet_package,
+  $puppet_provider        = $masterless::params::puppet_provider,
+  $hiera_ensure           = $masterless::params::hiera_ensure,
+  $hiera_package          = $masterless::params::hiera_package,
+  $hiera_provider         = $masterless::params::hiera_provider,
+  $hiera_backend_package  = $masterless::params::hiera_backend_package,
+  $hiera_backend_version  = $masterless::params::hiera_backend_version,
+  $hiera_backend_provider = $masterless::params::hiera_backend_provider,
 ) inherits masterless::params {
 
   if $puppet_ensure !~ /^[a-zA-Z0-9\._-]+$/ {
