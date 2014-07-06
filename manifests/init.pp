@@ -31,8 +31,8 @@
 # [*hiera_provider*]
 #   Set the provider used to install hiera.
 #
-# [*hiera_backend_version*]
-#   Set the version of the hiera backend.
+# [*hiera_backend_ensure*]
+#   Set the state the hiera backend should be in.
 #
 # [*hiera_backend_package*]
 #   Set the name of the hiera backend to be installed.
@@ -76,8 +76,8 @@ class masterless (
   $hiera_ensure           = $masterless::params::hiera_ensure,
   $hiera_package          = $masterless::params::hiera_package,
   $hiera_provider         = $masterless::params::hiera_provider,
+  $hiera_backend_ensure   = $masterless::params::hiera_backend_ensure,
   $hiera_backend_package  = $masterless::params::hiera_backend_package,
-  $hiera_backend_version  = $masterless::params::hiera_backend_version,
   $hiera_backend_provider = $masterless::params::hiera_backend_provider,
   $rotate                 = $masterless::params::puppet_rotate,
   $rotate_every           = $masterless::params::puppet_rotate_every,
@@ -135,7 +135,7 @@ class masterless (
 
   if $hiera_backend_package != undef {
     package { $hiera_backend_package:
-      ensure   => $hiera_backend_version,
+      ensure   => $hiera_backend_ensure,
       provider => $hiera_backend_provider,
     }
   }
