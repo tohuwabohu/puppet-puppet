@@ -11,11 +11,12 @@
 # Copyright 2014 Martin Meinhold, unless otherwise noted.
 #
 class masterless::params {
+  $ensure = present
+
   $puppet_ensure = installed
   $puppet_package = 'puppet'
   $puppet_provider = undef
 
-  $puppet_masterless_ensure = present
   $puppet_conf_dir = '/etc/puppet'
   $puppet_manifest_file = '/etc/puppet/manifests/site.pp'
   $puppet_log_dir = '/var/log/puppet'
