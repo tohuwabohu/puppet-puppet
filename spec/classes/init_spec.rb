@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe 'masterless' do
-  let(:title) { 'masterless' }
+describe 'puppet' do
+  let(:title) { 'puppet' }
 
   describe 'by default' do
     let(:params) { {} }
