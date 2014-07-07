@@ -19,7 +19,7 @@
 # [*hiera_provider*]
 #   Set the provider used to install hiera.
 #
-# [*hiera_backend_version*]
+# [*hiera_backend_ensure*]
 #   Set the version of the hiera backend.
 #
 # [*hiera_backend_package*]
@@ -43,8 +43,8 @@ class puppet (
   $hiera_ensure           = $puppet::params::hiera_ensure,
   $hiera_package          = $puppet::params::hiera_package,
   $hiera_provider         = $puppet::params::hiera_provider,
+  $hiera_backend_ensure   = $puppet::params::hiera_backend_ensure,
   $hiera_backend_package  = $puppet::params::hiera_backend_package,
-  $hiera_backend_version  = $puppet::params::hiera_backend_version,
   $hiera_backend_provider = $puppet::params::hiera_backend_provider,
 ) inherits puppet::params {
 
@@ -76,7 +76,7 @@ class puppet (
 
   if $hiera_backend_package != undef {
     package { $hiera_backend_package:
-      ensure   => $hiera_backend_version,
+      ensure   => $hiera_backend_ensure,
       provider => $hiera_backend_provider,
     }
   }

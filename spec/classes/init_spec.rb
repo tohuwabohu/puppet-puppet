@@ -83,7 +83,7 @@ describe 'puppet' do
   end
 
   describe 'with hiera_backend_package => hiera-eyaml and hiera_backend_version => 1.0.0' do
-    let(:params) { {:hiera_backend_package => 'hiera-eyaml', :hiera_backend_version => '1.0.0'} }
+    let(:params) { {:hiera_backend_package => 'hiera-eyaml', :hiera_backend_ensure => '1.0.0'} }
 
     it { should contain_package('hiera-eyaml').with_ensure('1.0.0') }
   end
