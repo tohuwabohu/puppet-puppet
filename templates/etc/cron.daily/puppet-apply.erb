@@ -2,8 +2,8 @@
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 PUPPET_OPTS="--detailed-exitcodes --color=false"
-PUPPET_MANIFEST="<%= @puppet_manifest_file %>"
-LOG_FILE="<%= @puppet_log_file %>"
+PUPPET_MANIFEST="<%= @manifest_file %>"
+LOG_FILE="<%= @log_file %>"
 TEMP_FILE=$(mktemp -t puppet.XXXXXXXXXX)
 
 if [ "$EUID" -ne "0" ]; then
@@ -13,7 +13,7 @@ fi
 
 chmod 600 $TEMP_FILE
 apt-get -qq update
-cd "<%= @puppet_conf_dir %>"
+cd "<%= @conf_dir %>"
 puppet apply $PUPPET_OPTS $PUPPET_MANIFEST 2>&1 \
   | gawk '{ print strftime("%Y-%m-%d %H:%M:%S"), $0; fflush(); }' \
   | tee -a $LOG_FILE \
