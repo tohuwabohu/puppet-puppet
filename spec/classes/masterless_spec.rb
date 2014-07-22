@@ -37,6 +37,13 @@ describe 'puppet::masterless' do
     end
   end
 
+  describe 'with enable => false' do
+    let(:params) { {:enable => false} }
+
+    specify { should contain_file('/etc/cron.daily/puppet-apply').with_ensure('absent') }
+    specify { should contain_logrotate__rule('puppet').with_ensure('present') }
+  end
+
   describe 'should not accept invalid conf_dir' do
     let(:params) { {:conf_dir => 'invalid conf_dir'} }
 

@@ -7,6 +7,9 @@
 # [*ensure*]
 #   Set the state the masterless mode should be in: either present or absent.
 #
+# [*enable*]
+#   Set to `true` to enable the masterless mode once a day, to `false` to turn it off.
+#
 # [*conf_dir*]
 #   Set the main configuration directory (e.g. /etc/puppet).
 #
@@ -43,6 +46,7 @@
 #
 class puppet::masterless (
   $ensure        = $puppet::params::puppet_masterless_ensure,
+  $enable        = $puppet::params::puppet_masterless_enable,
   $conf_dir      = $puppet::params::puppet_conf_dir,
   $manifest_file = $puppet::params::puppet_manifest_file,
   $log_dir       = $puppet::params::puppet_log_dir,
@@ -53,6 +57,7 @@ class puppet::masterless (
   $mail_subject  = $puppet::params::puppet_mail_subject,
 ) inherits puppet::params {
 
+  validate_bool($enable)
   validate_absolute_path($conf_dir)
   validate_absolute_path($manifest_file)
   validate_absolute_path($log_dir)
@@ -69,13 +74,21 @@ class puppet::masterless (
 
   require puppet
 
-  $log_file_ensure = $ensure ? {
-    absent  => absent,
+  $log_file = "${log_dir}/puppet.log"
+  $cron_file = $::osfamily ? {
+    default => '/etc/cron.daily/puppet-apply',
+  }
+  $cron_file_enable = $enable ? {
+    false   => absent,
     default => file,
   }
-  $log_file = "${log_dir}/puppet.log"
-  file { '/etc/cron.daily/puppet-apply':
-    ensure  => $log_file_ensure,
+  $cron_file_ensure = $ensure ? {
+    absent  => absent,
+    default => $cron_file_enable,
+  }
+
+  file { $cron_file:
+    ensure  => $cron_file_ensure,
     content => template('puppet/etc/cron.daily/puppet-apply.erb'),
     owner   => 'root',
     group   => 'root',
