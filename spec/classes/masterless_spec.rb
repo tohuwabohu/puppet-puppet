@@ -6,15 +6,15 @@ describe 'puppet::masterless' do
   describe 'by default' do
     let(:facts) { {} }
 
-    it { should contain_file('/etc/cron.daily/puppet-apply').with(
+    specify { should contain_file('/etc/cron.daily/puppet-apply').with(
         'ensure' => 'file',
         'owner'  => 'root',
         'group'  => 'root',
         'mode'   => '0755'
       )
     }
-    it { should contain_file('/etc/cron.daily/puppet-apply').without_content(/mail/) }
-    it { should contain_logrotate__rule('puppet').with(
+    specify { should contain_file('/etc/cron.daily/puppet-apply').without_content(/mail/) }
+    specify { should contain_logrotate__rule('puppet').with(
         'ensure' => 'present',
         'rotate' => '5',
         'size'   => '100k'
@@ -25,9 +25,10 @@ describe 'puppet::masterless' do
   describe 'with ensure => absent' do
     let(:params) { {:ensure => 'absent'} }
 
-    it { should contain_file('/etc/cron.daily/puppet-apply').with_ensure('absent') }
-    it { should contain_logrotate__rule('puppet').with_ensure('absent') }
+    specify { should contain_file('/etc/cron.daily/puppet-apply').with_ensure('absent') }
+    specify { should contain_logrotate__rule('puppet').with_ensure('absent') }
   end
+
   describe 'with invalid ensure' do
     let(:params) { {:ensure => 'invalid'} }
 
@@ -63,7 +64,7 @@ describe 'puppet::masterless' do
   describe 'with rotate => 10' do
     let(:params) { {:rotate => 10} }
 
-    it { should contain_logrotate__rule('puppet').with_rotate(10) }
+    specify { should contain_logrotate__rule('puppet').with_rotate(10) }
   end
 
   describe 'with invalid rotate' do
@@ -77,7 +78,7 @@ describe 'puppet::masterless' do
   describe 'with rotate_every => week' do
     let(:params) { {:rotate_every => 'week'} }
 
-    it { should contain_logrotate__rule('puppet').with_rotate_every('week') }
+    specify { should contain_logrotate__rule('puppet').with_rotate_every('week') }
   end
 
   describe 'with invalid rotate_every' do
@@ -91,26 +92,26 @@ describe 'puppet::masterless' do
   describe 'with rotate_size => 100k' do
     let(:params) { {:rotate_size => '100k'} }
 
-    it { should contain_logrotate__rule('puppet').with_size('100k') }
+    specify { should contain_logrotate__rule('puppet').with_size('100k') }
   end
 
   describe 'with mail_to => foobar@example.com' do
     let(:params) { {:mail_to => 'foobar@example.com'} }
 
-    it { should contain_file('/etc/cron.daily/puppet-apply').with_content(/mail/) }
-    it { should contain_file('/etc/cron.daily/puppet-apply').with_content(/foobar@example.com/) }
+    specify { should contain_file('/etc/cron.daily/puppet-apply').with_content(/mail/) }
+    specify { should contain_file('/etc/cron.daily/puppet-apply').with_content(/foobar@example.com/) }
   end
 
   describe 'with empty mail_to' do
     let(:params) { {:mail_to => ''} }
 
-    it { should contain_file('/etc/cron.daily/puppet-apply').without_content(/mail/) }
+    specify { should contain_file('/etc/cron.daily/puppet-apply').without_content(/mail/) }
   end
 
   describe 'with subject => puppet changed something' do
     let(:params) { {:mail_to => 'root@example.com', :mail_subject => 'puppet changed something'} }
 
-    it { should contain_file('/etc/cron.daily/puppet-apply').with_content(/mail -s "puppet changed something"/) }
+    specify { should contain_file('/etc/cron.daily/puppet-apply').with_content(/mail -s "puppet changed something"/) }
   end
 
   describe 'with empty mail_subject' do
