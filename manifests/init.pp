@@ -52,6 +52,10 @@ class puppet (
     fail("Class[Puppet]: puppet_ensure must be alphanumeric, got '${puppet_ensure}'")
   }
 
+  if empty($puppet_packages) {
+    fail("Class[Puppet]: puppet_packages must not be empty")
+  }
+
   if $hiera_ensure !~ /^[a-zA-Z0-9\._-]+$/ {
     fail("Class[Puppet]: hiera_ensure must be alphanumeric, got '${hiera_ensure}'")
   }

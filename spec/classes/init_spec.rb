@@ -35,13 +35,13 @@ describe 'puppet' do
   end
 
   describe 'with puppet_package => chef' do
-    let(:params) { {:puppet_package => 'chef'} }
+    let(:params) { {:puppet_packages => 'chef'} }
 
     it { should contain_package('chef') }
   end
 
   describe 'with empty puppet_package' do
-    let(:params) { {:puppet_package => ''} }
+    let(:params) { {:puppet_packages => ''} }
 
     it do
       expect { should contain_package('puppet') }.to raise_error(Puppet::Error, /puppet_package/)
