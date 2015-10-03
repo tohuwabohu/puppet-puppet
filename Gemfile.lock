@@ -106,7 +106,10 @@ GEM
       facter (~> 1.6)
       hiera (~> 1.0)
       rgen (~> 0.6.5)
-    puppet-lint (0.3.2)
+    puppet-blacksmith (3.1.1)
+      puppet (>= 2.7.16)
+      rest-client
+    puppet-lint (1.1.0)
     puppet-syntax (1.1.1)
       puppet (>= 2.7.0)
       rake
@@ -122,6 +125,8 @@ GEM
       builder
       nokogiri (>= 1.4.1)
       trollop
+    rest-client (1.6.9)
+      mime-types (~> 1.16)
     retriable (2.1.0)
     rgen (0.6.6)
     rspec (2.14.1)
@@ -159,11 +164,14 @@ PLATFORMS
 DEPENDENCIES
   beaker (~> 1.19.1)
   beaker-rspec (~> 3.0.0)
+  mime-types (< 2.0)
   puppet
-  puppet-lint (~> 0.3.2)
+  puppet-blacksmith (~> 3.1.1)
+  puppet-lint (~> 1.1.0)
   puppet-syntax (~> 1.1.1)
   puppetlabs_spec_helper (~> 0.8.2)
   rake (~> 10.1.1)
+  rest-client (~> 1.6.7)
   rspec (~> 2.14.1)
   rspec-puppet (~> 1.0.1)
   serverspec (~> 1.7.0)
