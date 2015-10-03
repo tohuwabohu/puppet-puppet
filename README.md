@@ -60,7 +60,7 @@ The module has been tested on the following operating systems. Testing and patch
 * Ubuntu 12.04 (Precise Pangolin)
 * Ubuntu 14.04 (Trusty Tahr)
 
-[![Build Status](https://travis-ci.org/tohuwabohu/puppet-roundcube.png?branch=master)](https://travis-ci.org/tohuwabohu/puppet-roundcube)
+[![Build Status](https://travis-ci.org/tohuwabohu/puppet-puppet.png?branch=master)](https://travis-ci.org/tohuwabohu/puppet-puppet)
 
 ##Contributing
 
