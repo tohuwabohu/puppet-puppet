@@ -16,8 +16,8 @@ Install a specific version of puppet and hiera:
 
 ```
 class { 'puppet':
-  puppet_version => '3.4.0',
-  hiera_version  => '1.3.2',
+  puppet_ensure => '3.7.3-1puppetlabs1',
+  hiera_ensure  => '1.3.3-1puppetlabs1',
 }
 ```
 

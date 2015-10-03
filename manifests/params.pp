@@ -12,7 +12,7 @@
 #
 class puppet::params {
   $puppet_ensure = installed
-  $puppet_package = 'puppet'
+  $puppet_package = 'puppet-common'
   $puppet_provider = undef
 
   $puppet_masterless_ensure = present

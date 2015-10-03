@@ -12,12 +12,38 @@ describe 'by default' do
       apply_manifest(manifest, :catch_changes => true)
     end
 
-    describe package('puppet') do
+    describe package('puppet-common') do
       it { should be_installed }
     end
 
     describe package('hiera') do
       it { should be_installed }
+    end
+  end
+
+  context 'with custom versions' do
+    let(:manifest) { <<-EOS
+        class { 'puppet':
+          puppet_ensure => '3.7.3-1puppetlabs1',
+          hiera_ensure  => '1.3.3-1puppetlabs1',
+        }
+      EOS
+    }
+
+    specify 'should provision with no errors' do
+      apply_manifest(manifest, :catch_failures => true)
+    end
+
+    specify 'should be idempotent' do
+      apply_manifest(manifest, :catch_changes => true)
+    end
+
+    describe package('puppet-common') do
+      it { should be_installed.with_version('3.7.3-1puppetlabs1') }
+    end
+
+    describe package('hiera') do
+      it { should be_installed.with_version('1.3.3-1puppetlabs1') }
     end
   end
 
