@@ -10,12 +10,16 @@ RSpec.configure do |c|
   c.before :suite do
     hosts.each do |host|
       if fact('operatingsystem') == 'Ubuntu'
-        on host, 'apt-get install -y rubygems'
         on host, 'apt-get install -y exim4-daemon-light'
       end
       if fact('operatingsystem') == 'Ubuntu' and fact('operatingsystemmajrelease') == '12.04'
+        on host, 'apt-get install -y rubygems'
+
         # Pin version of highline to a Ruby 1.8.7 compatible
         on host, 'gem install highline --version 1.6.21'
+      end
+      if fact('operatingsystem') == 'Ubuntu' and fact('operatingsystemmajrelease') == '14.04'
+        on host, 'apt-get install -y ruby'
       end
 
       # Install module
