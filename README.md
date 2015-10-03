@@ -42,9 +42,12 @@ class { 'puppet::masterless':
 
 The module has been tested on the following operating systems. Testing and patches for other platforms are welcome.
 
-* Debian Linux 6.0 (Squeeze)
+* Debian 6.0 (Squeeze)
+* Debian 7.0 (Wheezy)
+* Ubuntu 12.04 (Precise Pangolin)
+* Ubuntu 14.04 (Trusty Tahr)
 
-[![Build Status](https://travis-ci.org/tohuwabohu/tohuwabohu-puppet.png?branch=master)](https://travis-ci.org/tohuwabohu/tohuwabohu-puppet)
+[![Build Status](https://travis-ci.org/tohuwabohu/puppet-roundcube.png?branch=master)](https://travis-ci.org/tohuwabohu/puppet-roundcube)
 
 ##Contributing
 
@@ -54,6 +57,16 @@ The module has been tested on the following operating systems. Testing and patch
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-##Release Notes/Contributors/Etc **Optional**
+###Development
 
-If you aren't using changelog, put your release notes here (though you should consider using changelog). You may also add any additional sections you feel are necessary or important to include here. Please use the `## ` header.
+This project uses rspec-puppet and beaker to ensure the module works as expected and to prevent regressions.
+
+```
+gem install bundler
+bundle install --path vendor
+
+bundle exec rake spec
+bundle exec rake beaker
+```
+(note: see [Beaker - Supported ENV variables](https://github.com/puppetlabs/beaker/wiki/How-to-Write-a-Beaker-Test-for-a-Module#beaker-rspec-details)
+for a list of environment variables to control the default behaviour of Beaker)
