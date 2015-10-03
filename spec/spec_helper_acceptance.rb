@@ -9,14 +9,10 @@ RSpec.configure do |c|
 
   c.before :suite do
     hosts.each do |host|
-      # Set up test environment
-      on host, 'touch /etc/puppet/manifests/site.pp'
-
       # Install module
       copy_module_to(host, :source => proj_root, :module_name => 'puppet', :ignore_list => ignore_list)
 
       # Install dependencies
-      on host, puppet('module', 'install', 'rodjek-logrotate', '--version 1.1.1')
       on host, puppet('module', 'install', 'puppetlabs-stdlib', '--version 4.9.0')
     end
   end

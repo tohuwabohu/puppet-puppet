@@ -36,10 +36,6 @@
   ],
   "dependencies": [
     {
-      "name": "rodjek/logrotate",
-      "version_requirement": "1.x"
-    },
-    {
       "name": "puppetlabs/stdlib",
       "version_requirement": "4.x"
     }

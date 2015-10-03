@@ -3,26 +3,22 @@
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 PUPPET_OPTS="--detailed-exitcodes --color=false"
 PUPPET_MANIFEST="<%= @manifest_file %>"
-LOG_FILE="<%= @log_file %>"
-TEMP_FILE=$(mktemp -t puppet.XXXXXXXXXX)
 
 if [ "$EUID" -ne "0" ]; then
   echo "This script must be run as root." 1>&2
   exit 1
 fi
 
-chmod 600 $TEMP_FILE
 apt-get -qq update
 cd "<%= @conf_dir %>"
-puppet apply $PUPPET_OPTS $PUPPET_MANIFEST 2>&1 \
-  | gawk '{ print strftime("%Y-%m-%d %H:%M:%S"), $0; fflush(); }' \
-  | tee -a $LOG_FILE \
-  > $TEMP_FILE
+puppet apply --logdest syslog $PUPPET_OPTS $PUPPET_MANIFEST &
+PID=$!
+wait $PID
 
 <% if !@mail_to.nil? && !@mail_to.empty? -%>
-if [ "${PIPESTATUS[0]}" -gt 0 ]; then
-  cat $TEMP_FILE | mail -s "<%= @mail_subject %>" <%= @mail_to %>
+if [ "$?" -gt 0 ]; then
+  grep -F "puppet-user[${PID}]" /var/log/syslog | mail -s "<%= @mail_subject %>" <%= @mail_to %>
 fi
 <% end -%>
 
-rm $TEMP_FILE
+exit 0

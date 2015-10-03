@@ -19,11 +19,6 @@ class puppet::params {
   $puppet_masterless_enable = true
   $puppet_conf_dir = '/etc/puppet'
   $puppet_manifest_file = '/etc/puppet/manifests/site.pp'
-  $puppet_log_dir = '/var/log/puppet'
-
-  $puppet_rotate = 5
-  $puppet_rotate_every = undef
-  $puppet_rotate_size = '100k'
 
   $puppet_mail_subject = '[Puppet] Changes have been applied on $(hostname)'
 
