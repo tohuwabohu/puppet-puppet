@@ -2,7 +2,8 @@
 
 ##Overview
 
-Manage the Puppet packages and run Puppet in masterless mode on a regular basis.
+Manage the Puppet package state and run Puppet in masterless mode on a regular basis. When changes are applied, a list
+of users can be notified.
 
 ##Usage
 
