@@ -40,6 +40,8 @@ GEM
     docker-api (1.22.4)
       excon (>= 0.38.0)
       json
+    domain_name (0.5.24)
+      unf (>= 0.0.5, < 1.0.0)
     excon (0.45.4)
     extlib (0.9.16)
     facter (1.7.6)
@@ -83,6 +85,8 @@ GEM
       json_pure
     highline (1.7.7)
     hocon (0.0.7)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     inflecto (0.0.2)
     inifile (2.0.2)
     ipaddress (0.8.0)
@@ -101,12 +105,13 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
+    netrc (0.10.3)
     nokogiri (1.5.11)
     puppet (3.8.3)
       facter (> 1.6, < 3)
       hiera (~> 1.0)
       json_pure
-    puppet-blacksmith (3.1.1)
+    puppet-blacksmith (3.3.1)
       puppet (>= 2.7.16)
       rest-client
     puppet-lint (1.1.0)
@@ -125,8 +130,10 @@ GEM
       builder
       nokogiri (>= 1.4.1)
       trollop
-    rest-client (1.6.9)
-      mime-types (~> 1.16)
+    rest-client (1.8.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     retriable (2.1.0)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
@@ -164,7 +171,7 @@ DEPENDENCIES
   beaker (~> 1.19.1)
   beaker-rspec (~> 3.0.0)
   puppet (~> 3.8.3)
-  puppet-blacksmith (~> 3.1.1)
+  puppet-blacksmith (~> 3.3.1)
   puppet-lint (~> 1.1.0)
   puppet-syntax (~> 1.1.1)
   puppetlabs_spec_helper (~> 0.8.2)
