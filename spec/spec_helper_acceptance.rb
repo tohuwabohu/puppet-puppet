@@ -14,7 +14,7 @@ RSpec.configure do |c|
 
       # Install dependencies
       on host, puppet('module', 'install', 'rodjek-logrotate', '--version 1.1.1')
-      on host, puppet('module', 'install', 'puppetlabs-stdlib', '--version 4.3.2')
+      on host, puppet('module', 'install', 'puppetlabs-stdlib', '--version 4.9.0')
     end
   end
 end
