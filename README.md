@@ -2,7 +2,7 @@
 
 ##Overview
 
-Manage the Puppet installation.
+Manage the Puppet packages and run Puppet in masterless mode on a regular basis.
 
 ##Usage
 
@@ -30,13 +30,25 @@ class { 'puppet':
 }
 ```
 
-Run puppet once a day and notify `root@example.com` in case changes have been made:
+Run puppet every thirty minutes and notify `root@example.com` in case changes have been made:
 
 ```
 class { 'puppet::masterless':
   mail_to => 'root@example.com',
 }
 ```
+
+Run puppet every six hours:
+
+```
+class { 'puppet::masterless':
+  cron_hour   => '*/6',
+  cron_minute => fqdn_rand(60),
+}
+```
+
+See [the cron type reference](https://docs.puppetlabs.com/references/stable/type.html#cron) for more information about
+the available cron options.
 
 ##Limitations
 

@@ -1,6 +1,6 @@
 # == Class: puppet::masterless
 #
-# Run Puppet once a day in masterless mode. All logs are send to syslog.
+# Run Puppet every 30 minutes in masterless mode. All logs are send to syslog.
 #
 # === Parameters
 #
@@ -8,13 +8,22 @@
 #   Set the state the masterless mode should be in: either present or absent.
 #
 # [*enable*]
-#   Set to `true` to enable the masterless mode once a day, to `false` to turn it off.
+#   Set to `true` to run Puppet on a regular basis; set to `false` to turn it off.
 #
 # [*conf_dir*]
-#   Set the main configuration directory (e.g. /etc/puppet).
+#   Set the main configuration directory (e.g. `/etc/puppet`).
 #
 # [*manifest_file*]
 #   Set the manifest file to be executed.
+#
+# [*cron_file*]
+#   The path to the script that is executed by cron. The script is managed by the class itself.
+#
+# [*cron_hour*]
+#   The hour expression of the cron job.
+#
+# [*cron_minute*]
+#   The minute expression of the cron job.
 #
 # [*mail_to*]
 #   Set the email address where to send the puppet log in case the run changed something (or failed). (Optional)
@@ -35,6 +44,9 @@ class puppet::masterless (
   $enable        = $puppet::params::puppet_masterless_enable,
   $conf_dir      = $puppet::params::puppet_conf_dir,
   $manifest_file = $puppet::params::puppet_manifest_file,
+  $cron_file     = $puppet::params::puppet_cron_file,
+  $cron_hour     = $puppet::params::puppet_cron_hour,
+  $cron_minute   = $puppet::params::puppet_cron_minute,
   $mail_to       = undef,
   $mail_subject  = $puppet::params::puppet_mail_subject,
 ) inherits puppet::params {
@@ -42,6 +54,7 @@ class puppet::masterless (
   validate_bool($enable)
   validate_absolute_path($conf_dir)
   validate_absolute_path($manifest_file)
+  validate_absolute_path($cron_file)
 
   if $ensure !~ /^present$|^absent$/ {
     fail("Class[Puppet::Masterless]: ensure must be either 'present' or 'absent', got '${ensure}'")
@@ -52,28 +65,30 @@ class puppet::masterless (
 
   require puppet
 
-  $cron_file = $::osfamily ? {
-    default => '/etc/cron.daily/puppet-apply',
-  }
-  $cron_file_enable = $enable ? {
+  $cron_ensure = $enable ? {
     false   => absent,
-    default => file,
-  }
-  $cron_file_ensure = $ensure ? {
-    absent  => absent,
-    default => $cron_file_enable,
+    default => $ensure,
   }
 
   file { $cron_file:
-    ensure  => $cron_file_ensure,
-    content => template('puppet/etc/cron.daily/puppet-apply.erb'),
+    ensure  => $ensure,
+    content => template('puppet/puppet-apply.erb'),
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
   }
 
+  cron { 'puppet':
+    ensure      => $cron_ensure,
+    command     => $cron_file,
+    environment => "PATH=${puppet::exec_path}",
+    user        => 'root',
+    hour        => $cron_hour,
+    minute      => $cron_minute,
+  }
+
   # TODO: remove me in the future
-  file { '/etc/logrotate.d/puppet':
+  file { ['/etc/logrotate.d/puppet', '/etc/cron.daily/puppet-apply']:
     ensure => absent,
     backup => false,
   }

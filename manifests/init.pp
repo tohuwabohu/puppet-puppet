@@ -46,6 +46,7 @@ class puppet (
   $hiera_backend_ensure   = $puppet::params::hiera_backend_ensure,
   $hiera_backend_package  = $puppet::params::hiera_backend_package,
   $hiera_backend_provider = $puppet::params::hiera_backend_provider,
+  $exec_path              = $puppet::params::exec_path,
 ) inherits puppet::params {
 
   if $puppet_ensure !~ /^[a-zA-Z0-9\._-]+$/ {
