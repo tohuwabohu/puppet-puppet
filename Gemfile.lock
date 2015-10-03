@@ -110,11 +110,13 @@ GEM
     puppet-syntax (1.1.1)
       puppet (>= 2.7.0)
       rake
-    puppetlabs_spec_helper (0.4.1)
-      mocha (>= 0.10.5)
+    puppetlabs_spec_helper (0.8.2)
+      mocha
+      puppet-lint
+      puppet-syntax
       rake
-      rspec (>= 2.9.0)
-      rspec-puppet (>= 0.1.1)
+      rspec
+      rspec-puppet
     rake (10.1.1)
     rbvmomi (1.8.1)
       builder
@@ -160,7 +162,7 @@ DEPENDENCIES
   puppet
   puppet-lint (~> 0.3.2)
   puppet-syntax (~> 1.1.1)
-  puppetlabs_spec_helper (~> 0.4.1)
+  puppetlabs_spec_helper (~> 0.8.2)
   rake (~> 10.1.1)
   rspec (~> 2.14.1)
   rspec-puppet (~> 1.0.1)
