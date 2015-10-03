@@ -49,7 +49,7 @@ class { 'puppet::masterless':
 ```
 
 See [the cron type reference](https://docs.puppetlabs.com/references/stable/type.html#cron) for more information about
-the available cron options.
+available cron options.
 
 ##Limitations
 
