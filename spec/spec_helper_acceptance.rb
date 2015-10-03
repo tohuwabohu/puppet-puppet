@@ -9,6 +9,9 @@ RSpec.configure do |c|
 
   c.before :suite do
     hosts.each do |host|
+      # Set up test environment
+      on host, 'touch /etc/puppet/manifests/site.pp'
+
       # Install module
       copy_module_to(host, :source => proj_root, :module_name => 'puppet', :ignore_list => ignore_list)
 
