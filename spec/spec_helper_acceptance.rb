@@ -9,6 +9,15 @@ RSpec.configure do |c|
 
   c.before :suite do
     hosts.each do |host|
+      if fact('operatingsystem') == 'Ubuntu'
+        on host, 'apt-get install -y rubygems'
+        on host, 'apt-get install -y exim4-daemon-light'
+      end
+      if fact('operatingsystem') == 'Ubuntu' and fact('operatingsystemmajrelease') == '12.04'
+        # Pin version of highline to a Ruby 1.8.7 compatible
+        on host, 'gem install highline --version 1.6.21'
+      end
+
       # Install module
       copy_module_to(host, :source => proj_root, :module_name => 'puppet', :ignore_list => ignore_list)
 
