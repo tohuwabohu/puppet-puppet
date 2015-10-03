@@ -16,6 +16,10 @@ describe 'by default' do
       it { should be_installed }
     end
 
+    describe package('puppet') do
+      it { should be_installed }
+    end
+
     describe package('hiera') do
       it { should be_installed }
     end
@@ -39,6 +43,10 @@ describe 'by default' do
     end
 
     describe package('puppet-common') do
+      it { should be_installed.with_version('3.7.3-1puppetlabs1') }
+    end
+
+    describe package('puppet') do
       it { should be_installed.with_version('3.7.3-1puppetlabs1') }
     end
 

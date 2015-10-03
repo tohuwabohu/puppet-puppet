@@ -5,13 +5,13 @@
 # === Parameters
 #
 # [*puppet_ensure*]
-#   Set state the package should be in.
+#   Set state the Puppet packages should be in.
 #
-# [*puppet_package*]
-#   Set the name of the package to be installed.
+# [*puppet_packages*]
+#   Set the list of Puppet packages to be installed.
 #
 # [*puppet_provider*]
-#   Set the provider used to install the package.
+#   Set the provider used to install the packages.
 #
 # [*hiera_ensure*]
 #   Set state the package should be in.
@@ -38,7 +38,7 @@
 #
 class puppet (
   $puppet_ensure          = $puppet::params::puppet_ensure,
-  $puppet_package         = $puppet::params::puppet_package,
+  $puppet_packages        = $puppet::params::puppet_packages,
   $puppet_provider        = $puppet::params::puppet_provider,
   $hiera_ensure           = $puppet::params::hiera_ensure,
   $hiera_package          = $puppet::params::hiera_package,
@@ -52,10 +52,6 @@ class puppet (
     fail("Class[Puppet]: puppet_ensure must be alphanumeric, got '${puppet_ensure}'")
   }
 
-  if $puppet_package !~ /^[a-zA-Z0-9\._-]+$/ {
-    fail("Class[Puppet]: puppet_package must be alphanumeric, got '${puppet_package}'")
-  }
-
   if $hiera_ensure !~ /^[a-zA-Z0-9\._-]+$/ {
     fail("Class[Puppet]: hiera_ensure must be alphanumeric, got '${hiera_ensure}'")
   }
@@ -64,7 +60,9 @@ class puppet (
     fail("Class[Puppet]: hiera_package must be alphanumeric, got '${hiera_package}'")
   }
 
-  package { $puppet_package:
+  $real_puppet_packages = any2array($puppet_packages)
+
+  package { $real_puppet_packages:
     ensure   => $puppet_ensure,
     provider => $puppet_provider,
   }
