@@ -8,7 +8,6 @@ if [ "$EUID" -ne "0" ]; then
   exit 1
 fi
 
-apt-get -qq update
 cd "<%= @conf_dir %>"
 puppet apply --logdest syslog $PUPPET_OPTS $PUPPET_MANIFEST &
 PID=$!
