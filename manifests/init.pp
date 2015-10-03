@@ -53,7 +53,7 @@ class puppet (
   }
 
   if empty($puppet_packages) {
-    fail("Class[Puppet]: puppet_packages must not be empty")
+    fail('Class[Puppet]: puppet_packages must not be empty')
   }
 
   if $hiera_ensure !~ /^[a-zA-Z0-9\._-]+$/ {
