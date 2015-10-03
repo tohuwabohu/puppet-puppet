@@ -26,7 +26,7 @@ Install puppet, hiera and the hiera backend `hiera-eyaml`:
 ```
 class { 'puppet':
   hiera_backend_package => 'hiera-eyaml',
-  hiera_backend_version => '2.0.0',
+  hiera_backend_ensure  => '2.0.0',
 }
 ```
 
