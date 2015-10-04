@@ -108,5 +108,5 @@ class puppet (
   }
 
   class { 'puppet::install': } ->
-  class { 'puppet::masterless': }
+  class { 'puppet::config': }
 }

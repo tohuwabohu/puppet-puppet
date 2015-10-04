@@ -2,12 +2,12 @@
 
 ##Overview
 
-Manage the Puppet package state and run Puppet in masterless mode on a regular basis. When changes are applied, a list
-of users can be notified.
+Manage the Puppet package state and run Puppet in masterless mode on a regular basis. When changes are applied, a given
+user can be notified via email.
 
 ##Usage
 
-Install puppet and hiera:
+Install puppet and hiera. By default, Puppet will be executed every 30 minutes and logs will be send to syslog.
 
 ```
 class { 'puppet': }
@@ -31,10 +31,10 @@ class { 'puppet':
 }
 ```
 
-Run puppet every thirty minutes and notify `root@example.com` in case changes have been made:
+Notify `root@example.com` in case changes have been made:
 
 ```
-class { 'puppet::masterless':
+class { 'puppet':
   mail_to => 'root@example.com',
 }
 ```
@@ -42,7 +42,7 @@ class { 'puppet::masterless':
 Run puppet every six hours:
 
 ```
-class { 'puppet::masterless':
+class { 'puppet':
   cron_hour   => '*/6',
   cron_minute => fqdn_rand(60),
 }
@@ -50,6 +50,14 @@ class { 'puppet::masterless':
 
 See [the cron type reference](https://docs.puppetlabs.com/references/stable/type.html#cron) for more information about
 available cron options.
+
+Or turn off the cron job completely
+
+```
+class { 'puppet':
+  cron_enable => false,
+}
+```
 
 ##Limitations
 

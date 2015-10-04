@@ -1,9 +1,6 @@
-# == Class: puppet::masterless
+# == Class: puppet::config
 #
-# Run Puppet every 30 minutes in masterless mode. All logs are send to syslog.
-#
-# === Parameters
-#
+# Set up everything required to run Puppet on a regular basis.
 #
 # === Authors
 #
@@ -13,7 +10,7 @@
 #
 # Copyright 2014 Martin Meinhold, unless otherwise noted.
 #
-class puppet::masterless inherits puppet {
+class puppet::config inherits puppet {
   $cron_ensure = $puppet::cron_enable ? {
     false   => absent,
     default => present,
@@ -34,6 +31,7 @@ class puppet::masterless inherits puppet {
     user        => 'root',
     hour        => $puppet::cron_hour,
     minute      => $puppet::cron_minute,
+    require     => File[$puppet::cron_file],
   }
 
   # TODO: remove me in the future
