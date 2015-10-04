@@ -1,4 +1,4 @@
-# == Class: puppet_masterless::params
+# == Class: puppet::params
 #
 # Default values of the puppet class.
 #
@@ -10,7 +10,7 @@
 #
 # Copyright 2014 Martin Meinhold, unless otherwise noted.
 #
-class puppet_masterless::params {
+class puppet::params {
   $puppet_ensure = installed
   $puppet_packages = [ 'puppet-common', 'puppet' ]
   $puppet_provider = undef

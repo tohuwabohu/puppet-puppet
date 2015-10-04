@@ -9,4 +9,4 @@
 # Learn more about module testing here:
 # http://docs.puppetlabs.com/guides/tests_smoke.html
 #
-class { 'puppet_masterless': }
+class { 'puppet': }
