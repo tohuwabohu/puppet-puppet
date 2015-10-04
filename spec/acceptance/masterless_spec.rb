@@ -1,6 +1,6 @@
 require 'spec_helper_acceptance'
 
-describe 'puppet::masterless' do
+describe 'puppet-apply' do
   before :all do
     create_remote_file(default, '/etc/puppet/manifests/site.pp', "
       node default {
@@ -17,21 +17,10 @@ describe 'puppet::masterless' do
       on default, 'rm -f /tmp/a-resource'
     end
 
-    let(:manifest) { "class {'puppet::masterless': }" }
+    let(:manifest) { "class {'puppet': }" }
 
     specify 'should provision with no errors' do
       apply_manifest(manifest, :catch_failures => true)
-    end
-
-    specify 'should be idempotent' do
-      apply_manifest(manifest, :catch_changes => true)
-    end
-
-    describe file('/usr/local/sbin/puppet-apply') do
-      it { should be_file }
-      it { should be_owned_by 'root' }
-      it { should be_grouped_into 'root' }
-      it { should be_mode 755 }
     end
 
     describe command('puppet-apply') do
@@ -52,7 +41,7 @@ describe 'puppet::masterless' do
     end
 
     let(:manifest) { <<-EOS
-        class { 'puppet::masterless':
+        class { 'puppet':
           mail_to => 'root',
         }
       EOS

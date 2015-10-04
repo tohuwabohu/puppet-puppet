@@ -1,6 +1,6 @@
 require 'spec_helper_acceptance'
 
-describe 'by default' do
+describe 'puppet' do
   context 'by default' do
     let(:manifest) { "class { 'puppet': }" }
 
@@ -22,6 +22,13 @@ describe 'by default' do
 
     describe package('hiera') do
       it { should be_installed }
+    end
+
+    describe file('/usr/local/sbin/puppet-apply') do
+      it { should be_file }
+      it { should be_owned_by 'root' }
+      it { should be_grouped_into 'root' }
+      it { should be_mode 755 }
     end
   end
 
