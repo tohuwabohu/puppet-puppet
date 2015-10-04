@@ -1,6 +1,6 @@
 # == Class: puppet
 #
-# Install and manage Puppet.
+# Install and manage Puppet-related packages. Sets up a cron job to run Puppet on a regular basis.
 #
 # === Parameters
 #

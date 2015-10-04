@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Martin Meinhold",
   "license": "Apache-2.0",
-  "summary": "Ensure Puppet runs on a regular basis and reports on changes.",
+  "summary": " Run Puppet in masterless mode on a regular basis and notify on changes.",
   "source": "https://github.com/tohuwabohu/puppet-puppet.git",
   "project_page": "https://github.com/tohuwabohu/puppet-puppet",
   "issues_url": "https://github.com/tohuwabohu/puppet-puppet/issues",
