@@ -65,22 +65,5 @@ class puppet (
     fail("Class[Puppet]: hiera_package must be alphanumeric, got '${hiera_package}'")
   }
 
-  $real_puppet_packages = any2array($puppet_packages)
-
-  package { $real_puppet_packages:
-    ensure   => $puppet_ensure,
-    provider => $puppet_provider,
-  }
-
-  package { $hiera_package:
-    ensure   => $hiera_ensure,
-    provider => $hiera_provider,
-  }
-
-  if $hiera_backend_package != undef {
-    package { $hiera_backend_package:
-      ensure   => $hiera_backend_ensure,
-      provider => $hiera_backend_provider,
-    }
-  }
+  class { 'puppet::install': }
 }
