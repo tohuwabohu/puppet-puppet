@@ -31,6 +31,9 @@ class puppet::params {
   }
   $cron_hour = '*'
   $cron_minute = fqdn_rand(30)
+  $cron_precommand = $::osfamily ? {
+    default => 'apt-get -qq update',
+  }
 
   $mail_subject = '[Puppet] Changes have been applied on $(hostname)'
 

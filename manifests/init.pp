@@ -46,6 +46,10 @@
 # [*cron_minute*]
 #   The minute expression of the cron job.
 #
+# [*cron_precommand*]
+#   A command invoked before running Puppet. Set to `undef` to disable. By default the package index will be updated,
+#   e.g. `apt-get update`.
+#
 # [*mail_to*]
 #   Set the email address where to send the puppet log in case the run changed something (or failed). (Optional)
 #
@@ -76,6 +80,7 @@ class puppet (
   $cron_file              = $puppet::params::cron_file,
   $cron_hour              = $puppet::params::cron_hour,
   $cron_minute            = $puppet::params::cron_minute,
+  $cron_precommand        = $puppet::params::cron_precommand,
   $mail_to                = undef,
   $mail_subject           = $puppet::params::mail_subject,
   $exec_path              = $puppet::params::exec_path,

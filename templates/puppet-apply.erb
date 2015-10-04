@@ -8,6 +8,10 @@ if [ "$EUID" -ne "0" ]; then
   exit 1
 fi
 
+<% if !@cron_precommand.nil? && !@cron_precommand.empty? -%>
+<%= @cron_precommand %>
+<% end -%>
+
 cd "<%= @puppet_conf_dir %>"
 puppet apply --logdest syslog $PUPPET_OPTS $PUPPET_MANIFEST &
 PID=$!

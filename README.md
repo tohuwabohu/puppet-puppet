@@ -5,9 +5,12 @@
 Manage the Puppet package state and run Puppet in masterless mode on a regular basis. When changes are applied, a given
 user can be notified via email.
 
+By default, Puppet will be executed every 30 minutes and logs will be send to syslog. Before running Puppet, the APT
+package index will be updated.
+
 ##Usage
 
-Install puppet and hiera. By default, Puppet will be executed every 30 minutes and logs will be send to syslog.
+Install puppet and hiera.
 
 ```
 class { 'puppet': }
@@ -60,9 +63,6 @@ class { 'puppet':
 ```
 
 ##Limitations
-
-The module does not update the APT index (or similar) on a regular basis. This is required to install the latest
-package version automatically and highly recommended, e.g. by configuring the relevant apt module.
 
 The module has been tested on the following operating systems. Testing and patches for other platforms are welcome.
 

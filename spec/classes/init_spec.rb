@@ -28,6 +28,7 @@ describe 'puppet' do
     }
     specify { should contain_file(cron_file).with_content(/"\/etc\/puppet"/) }
     specify { should contain_file(cron_file).with_content(/"\/etc\/puppet\/manifests\/site\.pp"/) }
+    specify { should contain_file(cron_file).with_content(/apt-get -qq update/) }
     specify { should contain_file(cron_file).without_content(/mail/) }
     specify { should contain_cron('puppet').with_ensure('present') }
   end
