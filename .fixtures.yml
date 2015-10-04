@@ -4,5 +4,5 @@ fixtures:
       repo: "puppetlabs/stdlib"
       ref: "4.9.0"
   symlinks:
-    puppet: "#{source_dir}"
+    puppet_masterless: "#{source_dir}"
 

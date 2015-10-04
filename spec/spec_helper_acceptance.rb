@@ -23,7 +23,7 @@ RSpec.configure do |c|
       end
 
       # Install module
-      copy_module_to(host, :source => proj_root, :module_name => 'puppet', :ignore_list => ignore_list)
+      copy_module_to(host, :source => proj_root, :module_name => 'puppet_masterless', :ignore_list => ignore_list)
 
       # Install dependencies
       on host, puppet('module', 'install', 'puppetlabs-stdlib', '--version 4.9.0')

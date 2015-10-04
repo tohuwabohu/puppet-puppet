@@ -17,7 +17,7 @@ describe 'puppet-apply' do
       on default, 'rm -f /tmp/a-resource'
     end
 
-    let(:manifest) { "class {'puppet': }" }
+    let(:manifest) { "class {'puppet_masterless': }" }
 
     specify 'should provision with no errors' do
       apply_manifest(manifest, :catch_failures => true)
@@ -41,7 +41,7 @@ describe 'puppet-apply' do
     end
 
     let(:manifest) { <<-EOS
-        class { 'puppet':
+        class { 'puppet_masterless':
           mail_to => 'root',
         }
       EOS

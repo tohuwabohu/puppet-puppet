@@ -1,8 +1,8 @@
 require 'spec_helper_acceptance'
 
-describe 'puppet' do
+describe 'puppet_masterless' do
   context 'by default' do
-    let(:manifest) { "class { 'puppet': }" }
+    let(:manifest) { "class { 'puppet_masterless': }" }
 
     specify 'should provision with no errors' do
       apply_manifest(manifest, :catch_failures => true)
@@ -34,7 +34,7 @@ describe 'puppet' do
 
   context 'with custom versions' do
     let(:manifest) { <<-EOS
-        class { 'puppet':
+        class { 'puppet_masterless':
           puppet_ensure => '3.7.3-1puppetlabs1',
           hiera_ensure  => '1.3.3-1puppetlabs1',
         }
@@ -64,7 +64,7 @@ describe 'puppet' do
 
   context 'with custom hiera_backend' do
     let(:manifest) { <<-EOS
-        class { 'puppet':
+        class { 'puppet_masterless':
           hiera_backend_package => 'hiera-eyaml',
           hiera_backend_ensure  => '2.0.0',
         }

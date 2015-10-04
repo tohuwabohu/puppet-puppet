@@ -1,4 +1,4 @@
-# == Class: puppet
+# == Class: puppet_masterless
 #
 # Install and manage Puppet.
 #
@@ -60,26 +60,26 @@
 #
 # Copyright 2013 Martin Meinhold, unless otherwise noted.
 #
-class puppet (
-  $puppet_ensure          = $puppet::params::puppet_ensure,
-  $puppet_packages        = $puppet::params::puppet_packages,
-  $puppet_provider        = $puppet::params::puppet_provider,
-  $puppet_conf_dir        = $puppet::params::puppet_conf_dir,
-  $puppet_manifest_file   = $puppet::params::puppet_manifest_file,
-  $hiera_ensure           = $puppet::params::hiera_ensure,
-  $hiera_package          = $puppet::params::hiera_package,
-  $hiera_provider         = $puppet::params::hiera_provider,
-  $hiera_backend_ensure   = $puppet::params::hiera_backend_ensure,
-  $hiera_backend_package  = $puppet::params::hiera_backend_package,
-  $hiera_backend_provider = $puppet::params::hiera_backend_provider,
-  $cron_enable            = $puppet::params::cron_enable,
-  $cron_file              = $puppet::params::cron_file,
-  $cron_hour              = $puppet::params::cron_hour,
-  $cron_minute            = $puppet::params::cron_minute,
+class puppet_masterless (
+  $puppet_ensure          = $puppet_masterless::params::puppet_ensure,
+  $puppet_packages        = $puppet_masterless::params::puppet_packages,
+  $puppet_provider        = $puppet_masterless::params::puppet_provider,
+  $puppet_conf_dir        = $puppet_masterless::params::puppet_conf_dir,
+  $puppet_manifest_file   = $puppet_masterless::params::puppet_manifest_file,
+  $hiera_ensure           = $puppet_masterless::params::hiera_ensure,
+  $hiera_package          = $puppet_masterless::params::hiera_package,
+  $hiera_provider         = $puppet_masterless::params::hiera_provider,
+  $hiera_backend_ensure   = $puppet_masterless::params::hiera_backend_ensure,
+  $hiera_backend_package  = $puppet_masterless::params::hiera_backend_package,
+  $hiera_backend_provider = $puppet_masterless::params::hiera_backend_provider,
+  $cron_enable            = $puppet_masterless::params::cron_enable,
+  $cron_file              = $puppet_masterless::params::cron_file,
+  $cron_hour              = $puppet_masterless::params::cron_hour,
+  $cron_minute            = $puppet_masterless::params::cron_minute,
   $mail_to                = undef,
-  $mail_subject           = $puppet::params::mail_subject,
-  $exec_path              = $puppet::params::exec_path,
-) inherits puppet::params {
+  $mail_subject           = $puppet_masterless::params::mail_subject,
+  $exec_path              = $puppet_masterless::params::exec_path,
+) inherits puppet_masterless::params {
 
   if $puppet_ensure !~ /^[a-zA-Z0-9\._-]+$/ {
     fail("Class[Puppet]: puppet_ensure must be alphanumeric, got '${puppet_ensure}'")
@@ -107,6 +107,6 @@ class puppet (
     fail('Class[Puppet::Masterless]: mail_subject cannot be empty')
   }
 
-  class { 'puppet::install': } ->
-  class { 'puppet::config': }
+  class { 'puppet_masterless::install': } ->
+  class { 'puppet_masterless::config': }
 }

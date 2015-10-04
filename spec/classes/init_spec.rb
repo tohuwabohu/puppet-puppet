@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe 'puppet' do
-  let(:title) { 'puppet' }
+describe 'puppet_masterless' do
+  let(:title) { 'puppet_masterless' }
   let(:cron_file) {'/usr/local/sbin/puppet-apply'}
 
   describe 'by default' do
