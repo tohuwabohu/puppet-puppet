@@ -61,6 +61,9 @@ class { 'puppet':
 
 ##Limitations
 
+The module does not update the APT index (or similar) on a regular basis. This is required to install the latest
+package version automatically and highly recommended, e.g. by configuring the relevant apt module.
+
 The module has been tested on the following operating systems. Testing and patches for other platforms are welcome.
 
 * Debian 6.0 (Squeeze)
