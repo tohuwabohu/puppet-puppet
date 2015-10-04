@@ -104,7 +104,7 @@ class puppet (
   validate_absolute_path($cron_file)
 
   if !empty($mail_to) and empty($mail_subject) {
-    fail('Class[Puppet::Masterless]: mail_subject cannot be empty')
+    fail('Class[Puppet]: mail_subject cannot be empty')
   }
 
   class { 'puppet::install': } ->
