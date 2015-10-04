@@ -1,6 +1,6 @@
 # == Class: puppet_masterless
 #
-# Install and manage Puppet.
+# Install and manage Puppet packages and set up a cron job to run Puppet on a regular basis.
 #
 # === Parameters
 #
@@ -82,29 +82,29 @@ class puppet_masterless (
 ) inherits puppet_masterless::params {
 
   if $puppet_ensure !~ /^[a-zA-Z0-9\._-]+$/ {
-    fail("Class[Puppet]: puppet_ensure must be alphanumeric, got '${puppet_ensure}'")
+    fail("Class[Puppet_masterless]: puppet_ensure must be alphanumeric, got '${puppet_ensure}'")
   }
 
   if empty($puppet_packages) {
-    fail('Class[Puppet]: puppet_packages must not be empty')
+    fail('Class[Puppet_masterless]: puppet_packages must not be empty')
   }
 
   validate_absolute_path($puppet_conf_dir)
   validate_absolute_path($puppet_manifest_file)
 
   if $hiera_ensure !~ /^[a-zA-Z0-9\._-]+$/ {
-    fail("Class[Puppet]: hiera_ensure must be alphanumeric, got '${hiera_ensure}'")
+    fail("Class[Puppet_masterless]: hiera_ensure must be alphanumeric, got '${hiera_ensure}'")
   }
 
   if $hiera_package !~ /^[a-zA-Z0-9\._-]+$/ {
-    fail("Class[Puppet]: hiera_package must be alphanumeric, got '${hiera_package}'")
+    fail("Class[Puppet_masterless]: hiera_package must be alphanumeric, got '${hiera_package}'")
   }
 
   validate_bool($cron_enable)
   validate_absolute_path($cron_file)
 
   if !empty($mail_to) and empty($mail_subject) {
-    fail('Class[Puppet::Masterless]: mail_subject cannot be empty')
+    fail('Class[Puppet_masterless]: mail_subject cannot be empty')
   }
 
   class { 'puppet_masterless::install': } ->
