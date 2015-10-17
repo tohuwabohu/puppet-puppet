@@ -30,7 +30,7 @@ class puppet::params {
     default => '/usr/local/sbin/puppet-apply',
   }
   $cron_hour = '*'
-  $cron_minute = fqdn_rand(30)
+  $cron_minute = [fqdn_rand(30), fqdn_rand(30) + 30]
   $cron_precommand = $::osfamily ? {
     default => 'apt-get -qq update',
   }
