@@ -1,6 +1,6 @@
 {
   "name": "tohuwabohu-puppet",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Martin Meinhold",
   "license": "Apache-2.0",
   "summary": " Run Puppet in masterless mode on a regular basis and notify on changes.",
